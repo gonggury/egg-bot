@@ -1,1 +1,23 @@
 name: Egg Crawler Automation
+
+on:
+  schedule:
+    # 매시간 정각마다 실행
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-crawler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 로봇 코드 불러오기
+        uses: actions/checkout@v3
+
+      - name: 파이썬(Python) 환경 준비
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: 수집 요정 가동!
+        run: python egg_crawler.py
+
